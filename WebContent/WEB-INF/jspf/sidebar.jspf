@@ -1,0 +1,60 @@
+<%@ page pageEncoding="UTF-8"%>
+<%@ page import="ua.library.Path"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
+<c:set var="URL" value="${pageContext.request.requestURL }" />
+<c:set var="URI" value="${pageContext.request.requestURI }" />
+<c:set var="contextPath" value="${pageContext.request.contextPath }" />
+<c:set var="baseURL" value="${fn:replace(URL, URI, contextPath)}" />
+<c:set var="showBooksById"
+	value="${baseURL}${Path.COMMAND_SHOW_BOOKS}&categori=${param.categori}&id=" />
+<c:set var="categori" value="${param.categori}" />
+
+
+<!-- content-wrapper-->
+<div id="content-wrapper" class="container">
+	<!-- /sidebar-->
+	
+	<div id="sidebar" class="container">
+		<div>
+			<form method="get" >
+				<input type="hidden" name="command" value=viewMain /> <select
+					id="choose-content" name='categori'
+					onchange='submit()'>
+
+					<option value='0' ${param.categori == 0 ? 'selected' : ' '}>${catalog}</option>
+					<option value='1' ${param.categori == 1 ? 'selected' : ' '}>${author }</option>
+					<option value='2' ${param.categori == 2 ? 'selected' : ' '}>${genre }</option>
+					<option value='3' ${param.categori == 3 ? 'selected' : ' '}>${publisher}</option>
+					<option value='4' ${(param.categori == 4 )||(empty param.categori)? 'selected' : ' '}>${allBooks}</option>
+
+				</select>
+			</form>
+		</div>
+
+
+		<ul class="sidebar-links">
+
+			<c:set var="key" value="${param.categori}" />
+			<c:forEach items="${applicationScope.sidebarLinks[key]}" var="link">
+				<c:choose>
+					<c:when test="${(not empty param.id)&&(link.id == param.id) }">
+
+						<li><a class="currentLink"	href="${showBooksById}${link.getId()}"> 
+							<c:set	scope="session" var="currentNamePage" value="${link.getName()}" />
+								${link.getName()}
+							</a>
+						</li>
+					</c:when>
+					<c:otherwise>												
+						<li><a href="${showBooksById}${link.getId()}">${link.getName()}</a></li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+
+
+		</ul>
+	</div>

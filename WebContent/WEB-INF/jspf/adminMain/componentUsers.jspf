@@ -1,0 +1,21 @@
+<%@ page pageEncoding="UTF-8"%>
+
+<table id="t01">
+
+				<tr>
+					<th>Логин</th>
+					<th>Имя</th>
+					<th>Фамилия</th>
+					<th>Почта</th>
+					<th></th>
+				</tr>
+				<c:forEach items="${users}" var="user">
+					<tr>
+						<td>${user.getLogin() }</td>
+						<td>${user.getFirstName() }</td>
+						<td>${user.getLastName() }</td>
+						<td>${user.getEmail() }</td>
+						<td>Изменить</td>
+					</tr>
+				</c:forEach>
+			</table>

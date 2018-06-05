@@ -1,0 +1,29 @@
+<%@page import="ua.library.dao.entity.Book"%>
+<%@page import="ua.library.dao.been.LetterList"%>
+
+<%@ page pageEncoding="UTF-8"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath }" />
+<c:set var="letterSort"
+	value="${contextPath}${Path.COMMAND_SHOW_BOOKS}&categori=${param.categori}" />
+
+<c:if test="${not empty param.id}">
+
+</c:if>
+
+<!--letters -->
+<div class="letters">
+	<c:forEach items="${LetterList.getRussianLetters()}" var="letter">
+		<c:choose>
+			<c:when test="${not empty param.id}">
+				<a href="${letterSort}&id=${param.id}&sortBy=${letter }">${letter }</a>
+			</c:when>
+			
+			<c:otherwise>
+				<a href="${letterSort}&sortBy=${letter }">${letter }</a>
+			</c:otherwise>
+		</c:choose>
+	</c:forEach>
+</div>
+<!-- /letters -->

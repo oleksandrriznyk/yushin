@@ -1,0 +1,44 @@
+<%@page import="ua.library.dao.entity.Book"%>
+<%@ page pageEncoding="UTF-8"%>
+
+
+
+
+
+
+<!-- content-->
+<div id="content">	
+
+
+	<c:if test="${(not empty param.id)||(param.categori == 4)}">
+		Найдено книг:
+	${books.size()}<br>
+	<hr>
+		<c:forEach items="${books}" var="book">
+			<!-- book-info-->
+			<div class="book-info">
+				<div class="book-title">
+					<p>${book.getName() }</p>
+				</div>
+				<div class="book-img">
+					<img src="${book.getPicturePath()}" height="250" width="190"
+						alt="обложка" />
+				</div>
+				<div class="book-details">
+					<br> <strong>ISBN:</strong> ${book.getIsbn()} <br> <strong>Издательство:</strong>
+					${book.getPublishers()} <br> <strong>Количество
+						страниц:</strong> ${book.getPages()} <br> <strong>Год
+						издания:</strong> ${book.getPublicationDate()}
+
+					<p style="margin: 10px;">
+						<a href="#">Читать</a>
+					</p>
+				</div>
+			</div>
+	
+		<!-- /book-info-->
+		</c:forEach>
+	</c:if>
+
+</div>
+<!-- /content-->

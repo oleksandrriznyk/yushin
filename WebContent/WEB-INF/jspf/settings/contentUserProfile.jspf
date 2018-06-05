@@ -1,0 +1,25 @@
+<%@page import="ua.library.dao.entity.Role"%>
+<%@include file="/WEB-INF/jspf/directive/taglib.jspf"%>
+
+<%@page import="ua.library.dao.entity.Book"%>
+<%@ page pageEncoding="UTF-8"%>
+
+
+
+
+<!-- content-->
+<div id="content">	
+<!-- content-->
+	<div id="user-img">
+		<img src="${user.getPicturePath()}" height="250" width="190" alt="user" />
+	</div>
+	<div id= "user_info">
+		Логин 	: ${user.getLogin()}<br>
+		Роль 	: ${userRole}<br>
+		Имя 	: ${user.getFirstName()}<br>
+		Фамилия : ${user.getLastName()}<br>
+		Пол 	: ${user.isMale() ? 'Male' : 'Female'}<br>
+		Почта 	: ${user.getEmail()}<br>
+	</div>
+</div>
+<!-- /content-->

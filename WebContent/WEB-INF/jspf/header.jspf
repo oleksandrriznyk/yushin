@@ -1,0 +1,96 @@
+<%@include file="/WEB-INF/jspf/directive/taglib.jspf"%>
+<%@include file="/WEB-INF/jspf/nls/localizedMessagesMain.jspf"%>
+<%@page import="ua.library.Path"%>
+<%@ page pageEncoding="UTF-8"%>
+<c:set var="URL" value="${pageContext.request.requestURL }" />
+<c:set var="URI" value="${pageContext.request.requestURI }" />
+<c:set var="contextPath" value="${pageContext.request.contextPath }" />
+<c:set var="baseURL" value="${fn:replace(URL, URI, contextPath)}" />
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>main</title>
+
+<link rel="stylesheet" type="text/css"
+	href="${contextPath}/style/css/style-main.css">
+</head>
+<body>
+	<div id="top-wrapper">
+
+		<div id="top">
+
+			<a href="${baseURL}${Path.COMMAND_SETTINGS }"> <b>${user.getLogin()}</b>
+			</a>
+			<form action="controller">
+				<c:choose>
+					<c:when test="${user != null}">
+						<input type="hidden" name="command" value="logout" />
+						<input class="top-button" type="submit" value="${signOutButton }">
+					</c:when>
+					<c:otherwise>
+						<input type="hidden" name="command" value="logout" />
+						<input class="top-button" type="submit" value="${signInButton }">
+					</c:otherwise>
+				</c:choose>
+			</form>
+		</div>
+		<div id="logo">
+			<img src="${contextPath}/images/logo2.png">
+		</div>
+	</div>
+	<div id="wrapper">
+		<!-- /header -->
+		<header id="header">
+			<div class="container">
+				<div id="pm-wrapper">
+					<div id="preprimary-menu"></div>
+					<div id="primary-menu">
+						<ul>
+
+							<c:choose>
+
+								<c:when test="${userRole eq 'LIBRARIAN'}">
+									<li><a
+										href="${baseURL}${Path.COMMAND_MAIN_LIBRARIAN_MENU }">${main }</a></li>
+								</c:when>
+								<c:when test="${userRole eq 'ADMIN'}">
+									<li><a href="${baseURL}${Path.COMMAND_MAIN_ADMIN_MENU }">${main }</a></li>
+								</c:when>
+								<c:otherwise>
+									<li><a href="${baseURL}${Path.COMMAND_MAIN_MENU }">${main }</a></li>
+								</c:otherwise>
+								
+							</c:choose>
+
+							<li><a href="#">${aboutUs }</a></li>
+
+
+							<li><a href="#">${contacts }</a></li>
+						</ul>
+					</div>
+				</div>
+
+				<div id="secondary-menu">
+
+					<form action="controller">
+						<input type="hidden" name="command" value="search" />
+						<ul class="ba">
+							<li><input type="text" placeholder="поиск"
+								name="${searchButton }"></li>
+							<li><select id="search-select" name="option">
+									<option value="4" ${param.option == 4 ? 'selected' : ' '}>${name }</option>
+									<option value="1" ${param.option == 1 ? 'selected' : ' '}>${author }</option>
+									<option value="3" ${param.option == 3 ? 'selected' : ' '}>${publisher}</option>
+									<option value="5" ${param.option == 5 ? 'selected' : ' '}>${publicationDate}</option>
+							</select></li>
+							<li class="dws-input"><input class="search-button"
+								type="submit" value="${searchButton }"></li>
+						</ul>
+					</form>
+
+				</div>
+
+			</div>
+		</header>

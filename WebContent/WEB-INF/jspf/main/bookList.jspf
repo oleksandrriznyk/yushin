@@ -1,0 +1,48 @@
+<%@page import="ua.library.dao.entity.Book"%>
+<%@page import="ua.library.dao.been.LetterList"%>
+
+<%@ page pageEncoding="UTF-8"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<form action="controller" name="user" style="height: 198px;" method="post">
+<c:forEach items="${sessionScope.books}" var="book">
+	<!-- book-info-->
+	<div class="book-info">
+		<div class="book-title">
+			<p>${book.getName() }</p>
+		</div>
+		<div class="book-img">
+			<img src="${book.getPicturePath()}" height="250" width="190"
+				alt="обложка" />
+		</div>
+		<div class="book-details">
+			<br> <strong>ISBN:</strong> ${book.getIsbn()} <br> <strong>Издательство:</strong>
+			${book.getPublishers()} <br> <strong>Количество
+				страниц:</strong> ${book.getPages()} <br> <strong>Год издания:</strong>
+			${book.getPublicationDate()}
+
+			<p style="margin: 10px;">
+			
+			<c:set var="book_data">
+				<c:url value="success_book.jsp">  
+                  <c:param name="book_id" value="${book.getIsbn()}"/>  
+                  <c:param name="book_name" value="${book.getName()}"/>  
+                  <c:param name="ques" value="${book.getPicturePath()}"/>  
+                </c:url>  
+			</c:set>
+			
+            <a href="${book_data}">Забронировать книгу</a>  
+			</p>
+			
+		</div>
+
+		
+
+		
+	</div>
+
+
+	<!-- /book-info-->
+</c:forEach>
+</form>

@@ -1,0 +1,8 @@
+<c:set var="language"
+	value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
+	scope="session" />
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="ua.library.web.nls.messages" />
+<fmt:message key="login.button.submit" var="buttonValue" />
+<fmt:message key="login.label.username" var="username" />
+<fmt:message key="login.label.password" var="password" />

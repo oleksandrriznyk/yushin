@@ -1,0 +1,24 @@
+<%@ page pageEncoding="UTF-8"%>
+<%@include file="/WEB-INF/jspf/directive/taglib.jspf"%>
+
+<table id="t01">
+
+	<tr>
+		<th>ISBN</th>
+		<th>Название книги</th>
+		<th>Издатель</th>
+		<td>Дата публикации</td>
+		<th>количество</th>
+		<th></th>
+	</tr>
+	<c:forEach items="${books}" var="book">
+		<tr>
+			<td>${book.getIsbn() }</td>
+			<td>${book.getName() }</td>
+			<td>${book.getPublishers() }</td>
+			<td>${book.getPublicationDate() }</td>
+			<td>${book.getCopies() }</td>
+			<td><a href="changeBook&isbn=${book.getIsbn() }">изменить</a></td>
+		</tr>
+	</c:forEach>
+</table>

@@ -1,0 +1,21 @@
+<c:set var="language"
+	value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
+	scope="session" />
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="ua.library.web.nls.messages" />
+
+<fmt:message key="header.top.main" var="main" />
+<fmt:message key="header.top.about_us" var="aboutUs" />
+<fmt:message key="header.top.contacts" var="contacts" />
+<fmt:message key="header.button.sign_in" var="signInButton" />
+<fmt:message key="header.button.sign_out" var="signOutButton" />
+<fmt:message key="header.button.search" var="searchButton" />
+
+<fmt:message key="categories.all_books" var="allBooks" />
+<fmt:message key="categories.author" var="author" />
+<fmt:message key="categories.catalog" var="catalog" />
+<fmt:message key="categories.genre" var="genre" />
+<fmt:message key="categories.name" var="name" />
+<fmt:message key="categories.publication_date" var="publicationDate" />
+<fmt:message key="categories.publisher" var="publisher" />
+

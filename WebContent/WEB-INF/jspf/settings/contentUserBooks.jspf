@@ -1,0 +1,39 @@
+<%@page import="ua.library.dao.been.UserLoansBeen"%>
+<%@page import="ua.library.dao.entity.Book"%>
+<%@ page pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
+
+
+
+<!-- content-->
+<div id="content">
+
+
+
+	<c:if test="${not empty userloans}">
+		<table id="t01">
+
+			<tr>
+				<th>ISBN</th>
+				<th>Название книги</th>
+				<th>Дата выдачи</th>
+				<th>Дата сдачи</th>
+				<th>Пеня</th>
+			</tr>
+			<c:forEach items="${userloans}" var="loans">
+				<tr>
+					<td>${loans.getBookIsbn() }</td>
+					<td>${loans.getBookName() }</td>
+					<td>${loans.getAquireDate() }</td>
+					<td>${loans.getDueDate() }</td>
+					<td>${loans.getFine() }</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</c:if>
+
+
+</div>
+<!-- /content-->
